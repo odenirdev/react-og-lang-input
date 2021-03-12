@@ -18,6 +18,7 @@
       "jsx": true
     }
   },
+  "plugins": [ "html" ],
   "settings": {
     "react": {
       "version": "16"

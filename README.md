@@ -13,16 +13,22 @@ npm install --save react-og-lang-input
 ## Usage
 
 ```tsx
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 
-import MyComponent from 'react-og-lang-input'
-import 'react-og-lang-input/dist/index.css'
+import LangInput from 'react-og-lang-input'
 
-class Example extends Component {
-  render() {
-    return <MyComponent />
+const App = () => {
+  const [selected, setSelected] = useState('pt-Br')
+
+  function handleOnSelect(value: string) {
+    setSelected(value)
   }
+
+  return <LangInput value={selected} onSelect={handleOnSelect} />
 }
+
+export default App
+
 ```
 
 ## License
