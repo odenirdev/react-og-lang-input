@@ -22,7 +22,7 @@ const LangSelect = ({
   backgroundColor,
   toggleColor
 }: Props) => {
-  const { show, handleOnClick } = useLangSelect(onSelect)
+  const { show, handleOnClick } = useLangSelect()
 
   function renderSelected() {
     switch (value) {
