@@ -1,11 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
-function useLangSelect(onSelect: (value: string) => void) {
+function useLangSelect() {
   const [show, setShow] = useState(false)
-
-  useEffect(() => {
-    return onSelect('pt-BR')
-  }, [])
 
   function handleOnClick() {
     setShow(!show)
