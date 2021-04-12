@@ -9,7 +9,13 @@ const App = () => {
     setSelected(value)
   }
 
-  return <LangInput value={selected} onSelect={handleOnSelect} />
+  return (
+    <LangInput
+      value={selected}
+      onSelect={handleOnSelect}
+      langEnable={['pt-BR', 'en', 'fr']}
+    />
+  )
 }
 
 export default App

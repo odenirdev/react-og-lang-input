@@ -14,13 +14,17 @@ interface Props {
   onSelect: (value: string) => void
   backgroundColor?: string
   toggleColor?: string
+  langEnable?: string[]
+  defaultSelect?: string
 }
 
 const LangSelect = ({
   value,
   onSelect,
   backgroundColor,
-  toggleColor
+  toggleColor,
+  langEnable = [],
+  defaultSelect
 }: Props) => {
   const { show, handleOnClick } = useLangSelect()
 
@@ -50,14 +54,21 @@ const LangSelect = ({
           />
         )
 
-      default:
+      case 'fr':
         return (
           <Selected
-            image='https://upload.wikimedia.org/wikipedia/en/0/05/Flag_of_Brazil.svg'
-            value='pt-BR'
+            image='https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg'
+            value='fr'
           />
         )
+
+      default:
+        return onSelect(defaultSelect || 'pt-BR')
     }
+  }
+
+  function isEnabled(lang: string) {
+    return langEnable.length === 0 || langEnable.includes(lang)
   }
 
   return (
@@ -69,30 +80,49 @@ const LangSelect = ({
         </i>
       </div>
       <LangSelectGrid {...{ show, backgroundColor }}>
-        <Option
-          image='https://upload.wikimedia.org/wikipedia/en/0/05/Flag_of_Brazil.svg'
-          value='pt-BR'
-          selected={value === 'pt-BR'}
-          onClick={() => {
-            onSelect('pt-BR')
-          }}
-        />
-        <Option
-          image='https://upload.wikimedia.org/wikipedia/commons/8/89/Bandera_de_Espa%C3%B1a.svg'
-          value='es'
-          selected={value === 'es'}
-          onClick={() => {
-            onSelect('es')
-          }}
-        />
-        <Option
-          image='https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg'
-          value='en'
-          selected={value === 'en'}
-          onClick={() => {
-            onSelect('en')
-          }}
-        />
+        {isEnabled('pt-BR') && (
+          <Option
+            image='https://upload.wikimedia.org/wikipedia/en/0/05/Flag_of_Brazil.svg'
+            value='pt-BR'
+            selected={value === 'pt-BR'}
+            onClick={() => {
+              onSelect('pt-BR')
+            }}
+          />
+        )}
+
+        {isEnabled('es') && (
+          <Option
+            image='https://upload.wikimedia.org/wikipedia/commons/8/89/Bandera_de_Espa%C3%B1a.svg'
+            value='es'
+            selected={value === 'es'}
+            onClick={() => {
+              onSelect('es')
+            }}
+          />
+        )}
+
+        {isEnabled('en') && (
+          <Option
+            image='https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg'
+            value='en'
+            selected={value === 'en'}
+            onClick={() => {
+              onSelect('en')
+            }}
+          />
+        )}
+
+        {isEnabled('fr') && (
+          <Option
+            image='https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg'
+            value='fr'
+            selected={value === 'fr'}
+            onClick={() => {
+              onSelect('fr')
+            }}
+          />
+        )}
       </LangSelectGrid>
     </Container>
   )
